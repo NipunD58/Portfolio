@@ -1,0 +1,4 @@
+const tsrStartManifest = () => ({ routes: { __root__: { filePath: "D:/Projects/website/minhpham-clone-main/src/routes/__root.tsx", children: ["/", "/blog", "/photography"], assets: void 0, preloads: ["/assets/index-q_d8EFsl.js"] }, "/": { filePath: "D:/Projects/website/minhpham-clone-main/src/routes/index.tsx", children: void 0, assets: void 0, preloads: ["/assets/index-DmFekntA.js", "/assets/DotsBackground-Dh_Fli-O.js"] }, "/blog": { filePath: "D:/Projects/website/minhpham-clone-main/src/routes/blog.tsx", children: void 0, assets: void 0, preloads: ["/assets/blog-1AGzL2S6.js", "/assets/DotsBackground-Dh_Fli-O.js"] }, "/photography": { filePath: "D:/Projects/website/minhpham-clone-main/src/routes/photography.tsx", children: void 0, assets: void 0, preloads: ["/assets/photography-BI3zlaIc.js", "/assets/DotsBackground-Dh_Fli-O.js"] } }, clientEntry: "/assets/index-q_d8EFsl.js" });
+export {
+  tsrStartManifest
+};

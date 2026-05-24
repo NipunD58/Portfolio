@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { BlueCursor } from "./BlueCursor";
 import { DotsBackground } from "./DotsBackground";
 import { useReveal } from "@/hooks/use-reveal";
+import { Analytics } from "@vercel/analytics/next"
 
 const skills = [
   { title: "Embedded Systems", desc: "I can produce functional and efficient printed circuit boards." },
@@ -318,7 +319,7 @@ export function NipunDhawanSite() {
           ↑
         </button>
       )}
-
+      <Analytics />
       {/* Hero */}
       <section className="relative flex min-h-screen items-center px-6 pt-32 md:px-12">
         <div className="max-w-6xl">

@@ -1,4 +1,4 @@
-import { T as reactExports, K as jsxRuntimeExports } from "./worker-entry-CVeMZBik.js";
+import { T as reactExports, K as jsxRuntimeExports } from "./worker-entry-BCz2n-Un.js";
 function BlueCursor() {
   const [pos, setPos] = reactExports.useState({ x: -100, y: -100 });
   const [hover, setHover] = reactExports.useState(false);

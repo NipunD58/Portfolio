@@ -16803,7 +16803,7 @@ function getResponse() {
 }
 var HEADERS = { TSS_SHELL: "X-TSS_SHELL" };
 async function getStartManifest(matchedRoutes) {
-  const { tsrStartManifest } = await import("./_tanstack-start-manifest_v-BUL39I_V.js");
+  const { tsrStartManifest } = await import("./_tanstack-start-manifest_v-B7A5KoHw.js");
   const startManifest = tsrStartManifest();
   const rootRoute = startManifest.routes[rootRouteId] = startManifest.routes[rootRouteId] || {};
   rootRoute.assets = rootRoute.assets || [];
@@ -17889,8 +17889,8 @@ var getBaseManifest = getProdBaseManifest;
 var createEarlyHintsForRequest = createEarlyHintsCollector;
 async function loadEntries() {
   const [routerEntry, startEntry, pluginAdapters] = await Promise.all([
-    import("./router-DgdJY8Qm.js").then((n2) => n2.a),
-    import("./start-R-nHowv7.js"),
+    import("./router-DcEWlLGX.js").then((n2) => n2.a),
+    import("./start-pa5ILJkz.js"),
     import("./__23tanstack-start-plugin-adapters-Cwee5PKy.js")
   ]);
   return {
@@ -18209,13 +18209,13 @@ async function handleServerRoutes({ getRouter, request, url, executeRouter, cont
   }
   return ctx.response;
 }
-var fetch = createStartHandler(defaultStreamHandler);
+var fetch$1 = createStartHandler(defaultStreamHandler);
 function createServerEntry(entry) {
   return { async fetch(...args) {
     return await entry.fetch(...args);
   } };
 }
-var server_default = createServerEntry({ fetch });
+var server_default = createServerEntry({ fetch: fetch$1 });
 const workerEntry = server_default ?? {};
 export {
   rootRouteId as $,

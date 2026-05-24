@@ -1,6 +1,6 @@
-import { T as reactExports, K as jsxRuntimeExports } from "./worker-entry-CVeMZBik.js";
-import { L as Link } from "./router-DgdJY8Qm.js";
-import { D as DotsBackground, B as BlueCursor } from "./DotsBackground-DF_MRUVi.js";
+import { T as reactExports, K as jsxRuntimeExports } from "./worker-entry-BCz2n-Un.js";
+import { L as Link } from "./router-DcEWlLGX.js";
+import { D as DotsBackground, B as BlueCursor } from "./DotsBackground-_pb5XP7f.js";
 import "node:events";
 import "node:stream";
 import "node:async_hooks";
@@ -68,32 +68,25 @@ const awards = [
 ];
 const communityInitiatives = [
   {
-    title: "STEM Workshop Series",
-    org: "Local schools",
-    desc: "Hosted hands-on electronics sessions and simple build nights for junior students."
+    title: "Co Founder Starlight",
+    org: "NGO",
+    desc: "Co-founded Starlight, an NGO that organizes astronomy outreach programs and workshops for students and the community."
   },
   {
     title: "Robotics Club Mentorship",
-    org: "School robotics club",
+    org: "Robo Nexus",
     desc: "Mentored teams on prototyping, sensors, and iteration for competitions."
   },
   {
-    title: "Open-source Starter Kits",
+    title: "Open-source Hardware",
     org: "GitHub",
     desc: "Shared PCB and code templates so beginners can learn by building real projects."
-  },
-  {
-    title: "Astronomy Outreach",
-    org: "Community nights",
-    desc: "Organized skywatch events and light pollution awareness sessions."
   }
 ];
 const hobbies = [
   { title: "Astrophotography", desc: "Chasing clear nights and long exposures." },
-  { title: "Drone builds", desc: "Tuning frames, controllers, and telemetry." },
-  { title: "Guitar", desc: "Learning riffs and recording small loops." },
-  { title: "Sketching", desc: "Quick concept drawings and diagramming ideas." },
-  { title: "Reading sci-fi", desc: "Stories about future tech and big questions." },
+  { title: "Painting", desc: "Making landscape water colour paintings." },
+  { title: "Photography", desc: "Capturing moments and telling stories through the lens." },
   { title: "Cycling", desc: "Resetting the brain with long rides." }
 ];
 const clients = [

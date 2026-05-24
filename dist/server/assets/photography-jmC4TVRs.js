@@ -1,6 +1,6 @@
-import { T as reactExports, K as jsxRuntimeExports, a as React } from "./worker-entry-CVeMZBik.js";
-import { r as reactDomExports, R as ReactDOM, L as Link } from "./router-DgdJY8Qm.js";
-import { D as DotsBackground, B as BlueCursor } from "./DotsBackground-DF_MRUVi.js";
+import { T as reactExports, K as jsxRuntimeExports, a as React } from "./worker-entry-BCz2n-Un.js";
+import { r as reactDomExports, R as ReactDOM, L as Link } from "./router-DcEWlLGX.js";
+import { D as DotsBackground, B as BlueCursor } from "./DotsBackground-_pb5XP7f.js";
 import "node:events";
 import "node:stream";
 import "node:async_hooks";
@@ -5478,12 +5478,132 @@ const photoModules = /* @__PURE__ */ Object.assign({
 const photos = photoFiles.map((file) => {
   const title = file.replace(/\.[^/.]+$/, "");
   const src = photoModules[`../photos/${file}`];
+  const expectedOrientation = title === "DSCN4814" || title === "DSCN4871" ? "portrait" : void 0;
+  const fallbackRotate = expectedOrientation === "portrait" ? "ccw" : void 0;
   return {
     title,
     src,
-    alt: `Photograph ${title}`
+    alt: `Photograph ${title}`,
+    expectedOrientation,
+    fallbackRotate
   };
 });
+const getExifOrientation = (buffer) => {
+  const view = new DataView(buffer);
+  if (view.byteLength < 2 || view.getUint16(0, false) !== 65496) return null;
+  let offset = 2;
+  while (offset + 4 < view.byteLength) {
+    if (view.getUint8(offset) !== 255) break;
+    const marker = view.getUint8(offset + 1);
+    if (marker === 218) break;
+    const size = view.getUint16(offset + 2, false);
+    if (marker === 225) {
+      const exifStart = offset + 4;
+      if (view.getUint32(exifStart, false) !== 1165519206) return null;
+      const tiffStart = exifStart + 6;
+      const little = view.getUint16(tiffStart, false) === 18761;
+      const ifdOffset = view.getUint32(tiffStart + 4, little);
+      const ifdStart = tiffStart + ifdOffset;
+      const entries = view.getUint16(ifdStart, little);
+      for (let i = 0; i < entries; i += 1) {
+        const entryOffset = ifdStart + 2 + i * 12;
+        const tag = view.getUint16(entryOffset, little);
+        if (tag === 274) {
+          return view.getUint16(entryOffset + 8, little);
+        }
+      }
+      return null;
+    }
+    offset += 2 + size;
+  }
+  return null;
+};
+const decodeImage = (blob) => new Promise((resolve, reject) => {
+  const img = new Image();
+  const objectUrl = URL.createObjectURL(blob);
+  img.onload = () => {
+    URL.revokeObjectURL(objectUrl);
+    resolve(img);
+  };
+  img.onerror = () => {
+    URL.revokeObjectURL(objectUrl);
+    reject(new Error("Failed to decode image"));
+  };
+  img.src = objectUrl;
+});
+const rotateImage = async (blob, orientation) => {
+  const img = await decodeImage(blob);
+  const width = img.naturalWidth;
+  const height = img.naturalHeight;
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return null;
+  if (orientation === 6 || orientation === 8) {
+    canvas.width = height;
+    canvas.height = width;
+  } else {
+    canvas.width = width;
+    canvas.height = height;
+  }
+  switch (orientation) {
+    case 3:
+      ctx.translate(width, height);
+      ctx.rotate(Math.PI);
+      break;
+    case 6:
+      ctx.translate(height, 0);
+      ctx.rotate(Math.PI / 2);
+      break;
+    case 8:
+      ctx.translate(0, width);
+      ctx.rotate(-Math.PI / 2);
+      break;
+  }
+  ctx.drawImage(img, 0, 0);
+  const correctedBlob = await new Promise((resolve) => canvas.toBlob(resolve, blob.type || "image/jpeg", 0.92));
+  return correctedBlob ? URL.createObjectURL(correctedBlob) : null;
+};
+const normalizeImageOrientation = async (src, trackUrl, expectedOrientation, fallbackRotate) => {
+  const response = await fetch(src);
+  if (!response.ok) {
+    console.error("Failed to load image for orientation correction", src);
+    return src;
+  }
+  const blob = await response.blob();
+  if (blob.type !== "image/jpeg") return src;
+  const header = await blob.slice(0, 256 * 1024).arrayBuffer();
+  const exifOrientation = getExifOrientation(header);
+  try {
+    if (exifOrientation === 6 || exifOrientation === 8) {
+      const img = await decodeImage(blob);
+      const isDecodedPortrait = img.naturalHeight >= img.naturalWidth;
+      if (isDecodedPortrait) return src;
+    }
+  } catch {
+  }
+  let orientationToApply = exifOrientation && exifOrientation !== 1 ? exifOrientation : null;
+  if (!orientationToApply && expectedOrientation === "portrait") {
+    try {
+      const img = await decodeImage(blob);
+      if (img.naturalWidth > img.naturalHeight) {
+        orientationToApply = fallbackRotate === "ccw" ? 8 : 6;
+      }
+    } catch (error) {
+      console.error("Failed to inspect image for orientation", error);
+    }
+  }
+  if (!orientationToApply) return src;
+  try {
+    const correctedUrl = await rotateImage(blob, orientationToApply);
+    if (correctedUrl) {
+      trackUrl(correctedUrl);
+      return correctedUrl;
+    }
+  } catch (error) {
+    console.error("Failed to correct image orientation", error);
+  }
+  return src;
+};
 function SectionLabel({
   children
 }) {
@@ -5491,6 +5611,34 @@ function SectionLabel({
 }
 function PhotographyPage() {
   const [activePhoto, setActivePhoto] = reactExports.useState(null);
+  const [displayPhotos, setDisplayPhotos] = reactExports.useState(photos);
+  reactExports.useEffect(() => {
+    let isActive = true;
+    const objectUrls = [];
+    const normalizePhotos = async () => {
+      const normalized = await Promise.all(photos.map(async (photo) => {
+        if (!photo.src) return photo;
+        const normalizedSrc = await normalizeImageOrientation(photo.src, (url) => objectUrls.push(url), photo.expectedOrientation, photo.fallbackRotate);
+        return {
+          ...photo,
+          src: normalizedSrc
+        };
+      }));
+      if (isActive) setDisplayPhotos(normalized);
+    };
+    void normalizePhotos();
+    return () => {
+      isActive = false;
+      objectUrls.forEach((url) => URL.revokeObjectURL(url));
+    };
+  }, []);
+  reactExports.useEffect(() => {
+    if (!activePhoto) return;
+    const updated = displayPhotos.find((photo) => photo.title === activePhoto.title);
+    if (updated && updated.src !== activePhoto.src) {
+      setActivePhoto(updated);
+    }
+  }, [activePhoto, displayPhotos]);
   const openPhoto = (photo) => {
     if (!photo.src) return;
     setActivePhoto(photo);
@@ -5519,7 +5667,7 @@ function PhotographyPage() {
         /* @__PURE__ */ jsxRuntimeExports.jsx(SectionLabel, { children: "Selected shots" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display text-3xl leading-tight md:text-5xl", children: "Each frame is a study in atmosphere, texture, and the small details that make a place feel alive." })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-16 grid gap-px border border-border bg-border md:grid-cols-2 lg:grid-cols-3", children: photos.map((photo, index) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "group bg-background/80 p-6 backdrop-blur-sm", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-16 grid gap-px border border-border bg-border md:grid-cols-2 lg:grid-cols-3", children: displayPhotos.map((photo, index) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "group bg-background/80 p-6 backdrop-blur-sm", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "aspect-[4/5] overflow-hidden rounded-xl border border-border bg-muted/40", children: photo.src ? /* @__PURE__ */ jsxRuntimeExports.jsx("button", { type: "button", onClick: () => openPhoto(photo), "aria-label": `Open photograph ${photo.title}`, className: "h-full w-full cursor-zoom-in focus:outline-none", children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: photo.src, alt: photo.alt ?? photo.title, className: "photo-image h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]", loading: "lazy" }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex h-full items-center justify-center text-center text-muted-foreground", children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-mono-label", children: "Add photograph" }) }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-5", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-display text-2xl text-foreground", children: photo.title }),

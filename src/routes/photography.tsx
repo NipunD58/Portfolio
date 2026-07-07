@@ -7,6 +7,7 @@ import { getSeo } from "@/lib/seo";
 
 type Photo = {
   title: string;
+  displayTitle?: string;
   location?: string;
   year?: string;
   src?: string;
@@ -32,15 +33,17 @@ const photoModules = import.meta.glob("../photos/*.{jpg,JPG,jpeg,JPEG,png,webp}"
   import: "default",
 });
 
-const photos: Photo[] = photoFiles.map((file) => {
+const photos: Photo[] = photoFiles.map((file, index) => {
   const title = file.replace(/\.[^/.]+$/, "");
   const src = photoModules[`../photos/${file}`] as string | undefined;
   const expectedOrientation =
     title === "DSCN4814" || title === "DSCN4871" ? "portrait" : undefined;
   const fallbackRotate = expectedOrientation === "portrait" ? "ccw" : undefined;
+  const displayIndex = String(index + 1).padStart(2, "0");
 
   return {
     title,
+    displayTitle: `Photo ${displayIndex}`,
     src,
     alt: `Photograph ${title}`,
     expectedOrientation,
@@ -301,17 +304,25 @@ function PhotographyPage() {
           </p>
         </div>
 
-        <div className="mt-16 grid gap-px border border-border bg-border md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 mb-2">
+          <span className="font-mono-label text-xs text-muted-foreground">{photos.length} photographs in the archive</span>
+        </div>
+
+        <div className="mt-6 grid gap-px border border-border bg-border md:grid-cols-2 lg:grid-cols-3">
           {displayPhotos.map((photo, index) => (
             <div key={`${photo.title}-${index}`} className="group bg-background/80 p-6 backdrop-blur-sm">
-              <div className="aspect-[4/5] overflow-hidden rounded-xl border border-border bg-muted/40">
+              <div className="aspect-[4/5] overflow-hidden rounded-xl border border-border bg-muted/40 relative">
                 {photo.src ? (
                   <button
                     type="button"
                     onClick={() => openPhoto(photo)}
-                    aria-label={`Open photograph ${photo.title}`}
+                    aria-label={`Open ${photo.displayTitle ?? photo.title}`}
                     className="h-full w-full cursor-zoom-in focus:outline-none"
                   >
+                    {/* Index badge */}
+                    <span className="absolute top-3 left-3 z-10 font-mono-label text-[10px] rounded-full bg-background/70 border border-border px-2 py-0.5 text-muted-foreground backdrop-blur-sm">
+                      {photo.displayTitle ?? photo.title}
+                    </span>
                     <img
                       src={photo.src}
                       alt={photo.alt ?? photo.title}
@@ -326,7 +337,7 @@ function PhotographyPage() {
                 )}
               </div>
               <div className="mt-5">
-                <div className="font-display text-2xl text-foreground">{photo.title}</div>
+                <div className="font-display text-2xl text-foreground">{photo.displayTitle ?? photo.title}</div>
                 {(photo.location || photo.year) && (
                   <div className="font-mono-label mt-2 text-muted-foreground">
                     {[photo.location, photo.year].filter(Boolean).join(" · ")}
@@ -356,14 +367,16 @@ function PhotographyPage() {
         <DialogContent className="w-[min(92vw,1200px)] max-w-[92vw] border-border bg-background/95 p-0 overflow-hidden">
           {activePhoto && (
             <div className="flex flex-col">
-              <div className="border-b border-border px-6 py-5">
-                <div className="font-mono-label text-muted-foreground">Photograph</div>
-                <div className="mt-2 font-display text-2xl text-foreground">{activePhoto.title}</div>
-                {(activePhoto.location || activePhoto.year) && (
-                  <div className="font-mono-label mt-2 text-muted-foreground">
-                    {[activePhoto.location, activePhoto.year].filter(Boolean).join(" · ")}
-                  </div>
-                )}
+              <div className="border-b border-border px-6 py-5 flex items-start justify-between gap-4">
+                <div>
+                  <div className="font-mono-label text-muted-foreground">Photograph</div>
+                  <div className="mt-2 font-display text-2xl text-foreground">{activePhoto.displayTitle ?? activePhoto.title}</div>
+                  {(activePhoto.location || activePhoto.year) && (
+                    <div className="font-mono-label mt-2 text-muted-foreground">
+                      {[activePhoto.location, activePhoto.year].filter(Boolean).join(" · ")}
+                    </div>
+                  )}
+                </div>
               </div>
               <div className="bg-black/90 p-4 md:p-6">
                 <img

@@ -6,10 +6,15 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () =>
     getSeo({
-      title: "Nipun Dhawan — Making good shit since 2009",
+      title: "Nipun Dhawan — Making cool stuff since 2009",
       description:
         "Selectively skilled product designer with strong focus on producing high quality & impactful digital experience.",
       path: "/",
+      icons: {
+        icon: "/src/photos/logo.png",
+        sizes: "16x16",
+        type: "image/png",
+      },
     }),
 });
 

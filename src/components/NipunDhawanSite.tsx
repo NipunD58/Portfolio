@@ -285,16 +285,15 @@ export function NipunDhawanSite() {
 
       {/* Nav */}
       <header
-        className={`fixed left-0 right-0 top-0 z-40 flex items-center justify-between px-6 py-5 transition-[transform,opacity] duration-300 md:px-12 ${
-          navHidden ? "-translate-y-full opacity-0 pointer-events-none" : "translate-y-0 opacity-100"
-        }`}
+        className={`fixed left-0 right-0 top-0 z-40 flex items-center justify-between px-6 py-5 transition-[transform,opacity] duration-300 md:px-12 ${navHidden ? "-translate-y-full opacity-0 pointer-events-none" : "translate-y-0 opacity-100"
+          }`}
       >
         <div className="flex items-center gap-3">
           <div className="grid h-8 w-8 place-items-center rounded-full bg-primary text-primary-foreground font-display text-lg">N</div>
           <span className="font-mono-label">Nipun Dhawan</span>
         </div>
         <nav className="hidden gap-8 md:flex">
-          {[ "About", "Contact"].map((i) => (
+          {["About", "Contact"].map((i) => (
             <a key={i} href={`#${i.toLowerCase()}`} className="font-mono-label hover:text-primary transition-colors">
               {i}
             </a>
@@ -496,7 +495,7 @@ export function NipunDhawanSite() {
         <SectionLabel>My motto</SectionLabel>
         <h2 className="mt-8 font-display text-6xl leading-[0.95] md:text-[12vw]">
           If you’re going through hell, <em className="text-primary"> keep going.</em>
-          <br /> 
+          <br />
         </h2>
         <div className="font-mono-label mt-8 text-muted-foreground">— Winston Churchill</div>
       </section>
@@ -537,6 +536,12 @@ export function NipunDhawanSite() {
           <div className="flex items-center gap-6 font-mono-label text-muted-foreground">
             <Link to="/photography" className="transition-colors hover:text-primary">
               Photography
+            </Link>
+            <Link to="/privacy" className="transition-colors hover:text-primary">
+              Privacy Policy
+            </Link>
+            <Link to="/terms" className="transition-colors hover:text-primary">
+              Terms of Use
             </Link>
             <span>Gurugram, Haryana</span>
           </div>
@@ -588,9 +593,8 @@ function ProjectModal({
   return (
     <div
       aria-hidden={!open}
-      className={`fixed inset-0 z-[90] flex items-end justify-center transition-opacity duration-300 md:items-center ${
-        open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
-      }`}
+      className={`fixed inset-0 z-[90] flex items-end justify-center transition-opacity duration-300 md:items-center ${open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+        }`}
     >
       {/* Backdrop */}
       <button
@@ -602,9 +606,8 @@ function ProjectModal({
 
       {/* Panel */}
       <div
-        className={`relative z-10 m-4 max-h-[88vh] w-full max-w-3xl overflow-y-auto rounded-2xl border border-border bg-background shadow-2xl transition-all duration-300 ${
-          open ? "translate-y-0" : "translate-y-8"
-        }`}
+        className={`relative z-10 m-4 max-h-[88vh] w-full max-w-3xl overflow-y-auto rounded-2xl border border-border bg-background shadow-2xl transition-all duration-300 ${open ? "translate-y-0" : "translate-y-8"
+          }`}
       >
         {project && (
           <div className="p-8 md:p-12">
@@ -715,9 +718,8 @@ function AwardModal({
   return (
     <div
       aria-hidden={!open}
-      className={`fixed inset-0 z-[80] flex items-end justify-center transition-opacity duration-300 md:items-center ${
-        open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
-      }`}
+      className={`fixed inset-0 z-[80] flex items-end justify-center transition-opacity duration-300 md:items-center ${open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+        }`}
     >
       <button
         type="button"
@@ -727,9 +729,8 @@ function AwardModal({
       />
 
       <div
-        className={`relative z-10 m-4 w-full max-w-xl overflow-hidden rounded-2xl border border-border bg-background shadow-2xl transition-all duration-300 ${
-          open ? "translate-y-0" : "translate-y-8"
-        }`}
+        className={`relative z-10 m-4 w-full max-w-xl overflow-hidden rounded-2xl border border-border bg-background shadow-2xl transition-all duration-300 ${open ? "translate-y-0" : "translate-y-8"
+          }`}
       >
         {award && (
           <div className="p-8 md:p-10">
@@ -770,9 +771,8 @@ function CommunityModal({
   return (
     <div
       aria-hidden={!open}
-      className={`fixed inset-0 z-[80] flex items-end justify-center transition-opacity duration-300 md:items-center ${
-        open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
-      }`}
+      className={`fixed inset-0 z-[80] flex items-end justify-center transition-opacity duration-300 md:items-center ${open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+        }`}
     >
       <button
         type="button"
@@ -782,9 +782,8 @@ function CommunityModal({
       />
 
       <div
-        className={`relative z-10 m-4 w-full max-w-xl overflow-hidden rounded-2xl border border-border bg-background shadow-2xl transition-all duration-300 ${
-          open ? "translate-y-0" : "translate-y-8"
-        }`}
+        className={`relative z-10 m-4 w-full max-w-xl overflow-hidden rounded-2xl border border-border bg-background shadow-2xl transition-all duration-300 ${open ? "translate-y-0" : "translate-y-8"
+          }`}
       >
         {initiative && (
           <div className="p-8 md:p-10">

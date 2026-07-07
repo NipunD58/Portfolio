@@ -11,6 +11,8 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 
 import appCss from "../styles.css?url";
+import { BlueCursor } from "@/components/BlueCursor";
+import { ReactLenis } from "lenis/react";
 
 function NotFoundComponent() {
   return (
@@ -94,10 +96,25 @@ function NotFoundComponent() {
                 <div className="font-display text-2xl">Photography</div>
                 <div className="mt-1 text-sm text-muted-foreground">A small visual archive.</div>
               </Link>
+              <Link
+                to="/privacy"
+                className="rounded-2xl border border-border/70 bg-muted/30 px-4 py-4 transition-colors hover:border-primary hover:bg-muted/50"
+              >
+                <div className="font-display text-2xl">Privacy</div>
+                <div className="mt-1 text-sm text-muted-foreground">How your data is handled.</div>
+              </Link>
+              <Link
+                to="/terms"
+                className="rounded-2xl border border-border/70 bg-muted/30 px-4 py-4 transition-colors hover:border-primary hover:bg-muted/50"
+              >
+                <div className="font-display text-2xl">Terms</div>
+                <div className="mt-1 text-sm text-muted-foreground">Terms &amp; Conditions.</div>
+              </Link>
             </div>
           </aside>
         </main>
       </div>
+      <BlueCursor />
     </div>
   );
 }
@@ -133,6 +150,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
           </a>
         </div>
       </div>
+      <BlueCursor />
     </div>
   );
 }
@@ -184,7 +202,9 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <ReactLenis root>
+        <Outlet />
+      </ReactLenis>
     </QueryClientProvider>
   );
 }

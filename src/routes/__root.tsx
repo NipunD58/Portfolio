@@ -7,6 +7,7 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
+import { useEffect } from "react";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 
@@ -59,6 +60,7 @@ function NotFoundComponent() {
               </Link>
               <Link
                 to="/blog"
+                search={{ q: "", tags: "", sort: "newest", page: 1 }}
                 className="inline-flex items-center justify-center rounded-full border border-border bg-background/60 px-5 py-3 text-sm font-medium text-foreground transition-colors hover:border-primary hover:text-primary"
               >
                 Read the blog
@@ -84,6 +86,7 @@ function NotFoundComponent() {
               </Link>
               <Link
                 to="/blog"
+                search={{ q: "", tags: "", sort: "newest", page: 1 }}
                 className="rounded-2xl border border-border/70 bg-muted/30 px-4 py-4 transition-colors hover:border-primary hover:bg-muted/50"
               >
                 <div className="font-display text-2xl">Blog</div>
@@ -173,6 +176,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" },
+      { rel: "manifest", href: "/site.webmanifest" },
     ],
   }),
   shellComponent: RootShell,
@@ -200,9 +204,22 @@ function RootShell({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
+  // Prevent the browser from restoring scroll position on reload/navigation.
+  // We always want to start at the top of the page.
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.history.scrollRestoration = "manual";
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    }
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <ReactLenis root>
+        {/* Skip-to-content link for keyboard/screen-reader users — WCAG 2.4.1 */}
+        <a href="#main-content" className="skip-to-content">
+          Skip to main content
+        </a>
         <Outlet />
       </ReactLenis>
     </QueryClientProvider>

@@ -562,6 +562,7 @@ function BlogDetailPage() {
         </div>
         <Link
           to="/blog"
+          search={{ q: "", tags: "", sort: "newest", page: 1 }}
           className="font-mono-label rounded-full border border-border px-4 py-2 transition-colors hover:border-primary hover:text-primary"
         >
           ← All posts
@@ -599,7 +600,7 @@ function BlogDetailPage() {
                 </li>
                 <li aria-hidden="true">/</li>
                 <li>
-                  <Link to="/blog" className="transition-colors hover:text-primary">
+                  <Link to="/blog" search={{ q: "", tags: "", sort: "newest", page: 1 }} className="transition-colors hover:text-primary">
                     Blog
                   </Link>
                 </li>
@@ -796,6 +797,7 @@ function BlogDetailPage() {
           <div className="flex items-center gap-6">
             <Link
               to="/blog"
+              search={{ q: "", tags: "", sort: "newest", page: 1 }}
               className="font-mono-label text-muted-foreground transition-colors hover:text-primary"
             >
               All posts

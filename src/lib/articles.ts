@@ -281,7 +281,7 @@ while True:
     ],
     organizer: {
       name: "Nipun Dhawan",
-      url: "https://nipundhawan.com",
+      url: "https://nipundhawan.me",
     },
   },
   {
@@ -441,7 +441,7 @@ while True:
     ],
     organizer: {
       name: "Nipun Dhawan",
-      url: "https://nipundhawan.com",
+      url: "https://nipundhawan.me",
     },
   },
 ];

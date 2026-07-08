@@ -1,0 +1,11 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+
+Contact: mailto:dhawannipun58@gmail.com
+Expires: 2027-07-01T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://nipundhawan.me/.well-known/security.txt
+Policy: https://nipundhawan.me/privacy
+
+# This site is a personal portfolio. If you discover a security issue,
+# please disclose it responsibly via the contact address above.
+# There is no bug bounty program.

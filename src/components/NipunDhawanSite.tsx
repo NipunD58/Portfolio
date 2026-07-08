@@ -289,16 +289,16 @@ export function NipunDhawanSite() {
           }`}
       >
         <div className="flex items-center gap-3">
-          <div className="grid h-8 w-8 place-items-center rounded-full bg-primary text-primary-foreground font-display text-lg">N</div>
+          <div className="grid h-8 w-8 place-items-center rounded-full bg-primary text-primary-foreground font-display text-lg" aria-hidden="true">N</div>
           <span className="font-mono-label">Nipun Dhawan</span>
         </div>
-        <nav className="hidden gap-8 md:flex">
+        <nav className="hidden gap-8 md:flex" aria-label="Main navigation">
           {["About", "Contact"].map((i) => (
             <a key={i} href={`#${i.toLowerCase()}`} className="font-mono-label hover:text-primary transition-colors">
               {i}
             </a>
           ))}
-          <Link to="/blog" className="font-mono-label hover:text-primary transition-colors">
+          <Link to="/blog" search={{ q: "", tags: "", sort: "newest", page: 1 }} className="font-mono-label hover:text-primary transition-colors">
             Blog
           </Link>
         </nav>
@@ -318,6 +318,7 @@ export function NipunDhawanSite() {
         </button>
       )}
       {/* Hero */}
+      <main id="main-content">
       <section className="relative flex min-h-screen items-center px-6 pt-32 md:px-12">
         <div className="max-w-6xl">
           <SectionLabel>Nipun Dhawan</SectionLabel>
@@ -327,7 +328,7 @@ export function NipunDhawanSite() {
             since <span className="italic">2009</span>
           </h1>
         </div>
-        <div className="font-mono-label absolute bottom-8 right-6 md:right-12 text-muted-foreground">
+        <div className="font-mono-label absolute bottom-8 right-6 md:right-12 text-muted-foreground" aria-hidden="true">
           Scroll ↓
         </div>
       </section>
@@ -351,7 +352,7 @@ export function NipunDhawanSite() {
           {[skills, [...skills].reverse()].map((row, ri) => (
             <div key={ri} className="flex whitespace-nowrap">
               <div className={`flex shrink-0 gap-12 px-6 animate-marquee`} style={{ animationDirection: ri ? "reverse" : "normal" }}>
-                {[...row, ...row, ...row].map((s, i) => (
+                {[...row, ...row].map((s, i) => (
                   <div key={i} className="flex items-center gap-6">
                     <span className="font-display text-6xl md:text-8xl">{s.title}</span>
                     <span className="h-3 w-3 rounded-full bg-primary" />
@@ -547,6 +548,7 @@ export function NipunDhawanSite() {
           </div>
         </div>
       </footer>
+      </main>
 
       <ProjectModal
         project={openProject}

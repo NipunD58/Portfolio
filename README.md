@@ -163,3 +163,51 @@ This project helped strengthen skills in:
 
 This portfolio website represents a combination of design, development, and performance engineering. The project was built to create a professional digital presence while also serving as a platform to showcase technical skills, creativity, and problem-solving ability.
 It continues to evolve with new features, projects, and improvements over time.
+
+---
+
+# Development
+
+## Commands
+
+| Command | Description |
+|---|---|
+| `npm run dev` | Start local dev server (Vite HMR) |
+| `npm run typecheck` | TypeScript type-check without output |
+| `npm run lint` | ESLint check |
+| `npm run check` | Typecheck + lint (run before committing) |
+| `npm run build` | Production build (runs sitemap generation first) |
+| `npm run preview` | Preview the production build locally |
+
+## Environment Variables
+
+| Variable | Required | Description |
+|---|---|---|
+| `VITE_SITE_URL` | Recommended | Canonical URL (e.g. `https://nipundhawan.me`). Used for OG and canonical meta tags. |
+| `VITE_OG_IMAGE` | Optional | Default OG image URL for pages without a specific one. |
+
+Set these in Vercel → Project Settings → Environment Variables for production.
+
+---
+
+# Production Checklist
+
+Before deploying:
+
+- [ ] `npm run check` passes (typecheck + lint)
+- [ ] `npm run build` succeeds
+- [ ] `VITE_SITE_URL` is set in Vercel environment variables
+- [ ] Custom domain is configured in Vercel
+- [ ] `vercel.json` security headers are deployed (verify with [securityheaders.com](https://securityheaders.com))
+- [ ] Run [PageSpeed Insights](https://pagespeed.web.dev) — target 95+ on all metrics
+- [ ] Run [WAVE accessibility tool](https://wave.webaim.org) on all 4 routes
+
+---
+
+# Architecture & Docs
+
+See the [`docs/`](./docs/) directory for:
+
+- [ADR-001: Stack Selection](./docs/ADR-001-stack.md)
+- [ADR-002: Content Strategy](./docs/ADR-002-content.md)
+- [Architecture Overview](./docs/architecture.md)

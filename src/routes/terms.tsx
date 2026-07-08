@@ -100,9 +100,33 @@ function TermsPage() {
           <section>
             <h2 className="font-display text-2xl mb-3">Limitation of liability</h2>
             <p>
-              To the fullest extent permitted by law, Nipun Dhawan shall not be liable for any
-              indirect, incidental, or consequential damages arising from your use of or inability
-              to use this Site or its content.
+              To the fullest extent permitted by applicable law, Nipun Dhawan's total liability
+              for any claim arising out of or relating to this Site or its content shall not
+              exceed ₹0 (zero rupees), as this Site is a free personal portfolio with no
+              commercial transaction. In no event shall Nipun Dhawan be liable for any indirect,
+              incidental, special, consequential, or punitive damages, regardless of the cause of
+              action or the theory of liability, even if advised of the possibility of such damages.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="font-display text-2xl mb-3">Dispute resolution &amp; arbitration</h2>
+            <p>
+              Any dispute, controversy, or claim arising out of or in connection with these Terms,
+              or the breach, termination, or invalidity thereof, shall first be attempted to be
+              resolved through good-faith negotiation between the parties.
+            </p>
+            <p className="mt-3">
+              If negotiation fails, disputes shall be submitted to binding arbitration in
+              accordance with the Arbitration and Conciliation Act, 1996 (India). The seat of
+              arbitration shall be New Delhi, India. The language of arbitration shall be English.
+              The arbitral award shall be final and binding. Each party shall bear its own costs
+              unless the arbitrator determines otherwise.
+            </p>
+            <p className="mt-3">
+              <strong>Class action waiver:</strong> You agree that any dispute resolution
+              proceedings will be conducted only on an individual basis and not in a class,
+              consolidated, or representative action.
             </p>
           </section>
 
@@ -128,10 +152,21 @@ function TermsPage() {
           </section>
 
           <section>
+            <h2 className="font-display text-2xl mb-3">No artificial intelligence</h2>
+            <p>
+              All written content, design, and code on this Site is created by Nipun Dhawan. No
+              AI-generated text, AI-generated images, or AI-driven personalisation is used on
+              this Site. If this changes in the future, it will be clearly disclosed.
+            </p>
+          </section>
+
+          <section>
             <h2 className="font-display text-2xl mb-3">Governing law</h2>
             <p>
               These terms are governed by the laws of India, without regard to its conflict of
-              law provisions.
+              law provisions. Subject to the arbitration clause above, you consent to the exclusive
+              jurisdiction of courts located in New Delhi, India for any matters not subject to
+              arbitration.
             </p>
           </section>
 
@@ -171,6 +206,7 @@ function TermsPage() {
             </Link>
             <Link
               to="/blog"
+              search={{ q: "", tags: "", sort: "newest", page: 1 }}
               className="font-mono-label text-muted-foreground transition-colors hover:text-primary"
             >
               Blog

@@ -30,44 +30,39 @@ type Hobby = {
 };
 
 const awards: Award[] = [
-  {
-    title: "INSPIRE DLEPC",
-    org: "Department of Science & Technology",
-    desc: "Selected for the INSPIRE grant of ₹10,000 supporting student-led STEM projects.",
-  },
-  {
-    title: "School Innovation Marathon 2024",
-    org: "Atal Innovation Mission",
-    desc: "Winner of the School Innovation Marathon 2024 for developiing a AI-powered agricultural solution.",
-  },
-  {
-    title: "WRO Regional",
-    org: "India STEM Foundation",
-    desc: "Won the WRO Regional Robotics Competition getting 2nd place.",
-  },
-  {
-    title: "Odyssey of the Mind",
-    org: "Odyssey of the Mind",
-    desc: "Won 1st place in the Odyssey of the Mind for creative problem solving and innovation.",
-  },
-  {
-    title: "Samsung Solve for Tomorrow ",
-    org: "Samsung India",
-    desc: "Got selected for the top 100 Samsung Solve for Tomorrow 2025 for developing a autonomous agentic browser",
-  },
-  {
-    title: "Various Inter-school Competitions",
-    org: "Multiple",
-    desc: "Won multiple inter-school competitions in robotics and science fairs, showcasing my passion and skills in STEM.",
-  },
+  { title: "World Robotics Olympiad — Nationals", org: "WRO India", desc: "Ranked 15th across India; also placed 2nd at regionals and 1st at city level, with two virtual qualifications." },
+  { title: "Vivo Ignite All India Innovation Competition", org: "Vivo Ignite", desc: "Achieved All India Rank 175." },
+  { title: "Global Sustainability Award ’26", org: "Global Sustainability Award", desc: "Recognised for work advancing sustainability." },
+  { title: "Adaptive Spectrum Street Lighting", org: "Provisional patent filed", desc: "Filed a provisional patent for street lighting designed to minimise atmospheric scattering." },
+  { title: "Ordin Inter-School Robotics Competition", org: "Ordin", desc: "Placed 2nd in NCR." },
+  { title: "Youth Ideathon", org: "Youth Ideathon", desc: "Selected among the top 500 teams in India." },
+  { title: "Samsung Solve for Tomorrow ’25", org: "Samsung India", desc: "Selected among the top 50." },
+  { title: "Techniche ’25", org: "IIT Guwahati", desc: "Placed in the top 20." },
+  { title: "Blueprint Regional Selection", org: "IIT Delhi", desc: "Selected as the youngest participant in the 16–32 age band." },
+  { title: "Star Performer", org: "AISG-46", desc: "Awarded for a perfect 100/100 in the Class 10 Artificial Intelligence board examination." },
+  { title: "School Innovation Marathon", org: "Atal Innovation Mission", desc: "Placed among the top 20 teams in India." },
+  { title: "INSPIRE ’26", org: "Department of Science & Technology", desc: "Winner; awarded a ₹10,000 cash prize." },
+  { title: "Bose Beamline Challenge", org: "Bose", desc: "Received an honourable mention." },
+  { title: "Odyssey of the Mind", org: "Odyssey of the Mind", desc: "Gold in Problem 2 and silver in spontaneous." },
+  { title: "NYRC Regional Robotics", org: "NYRC", desc: "1st in Robo Soccer, 2nd in Robo War, and 1st in Drone Race." },
+  { title: "Asian Qualifiers Automations", org: "Asian Qualifiers", desc: "Recognised as the most contributing member." },
+  { title: "Vasudha", org: "Vasudha", desc: "Advanced to Round 2." },
+  { title: "Waste Chakra", org: "IIT Delhi & MCD", desc: "Placed in the top 100." },
+  { title: "Skill Development Award", org: "Protsahan", desc: "Recognised for skill development." },
+  { title: "Blue Tie Recipient", org: "AISG-46", desc: "Recognised by the school for contribution and achievement." },
+];
+
+const certifications = [
+  { provider: "Anthropic", items: ["Claude 101", "Introduction to Model Context Protocol (MCP)", "Model Context Protocol: Advanced Topics", "AI Fluency Framework & Foundations"] },
+  { provider: "Google & Google Cloud", items: ["Get Started with Google Workspace Tools Skill Badge", "Introduction to Generative AI"] },
+  { provider: "IBM", items: ["Artificial Intelligence Fundamentals", "AI Foundations", "AI Agents Fundamentals", "Data Visualisation Using Python", "Python for Data Science", "Cybersecurity Fundamentals"] },
+  { provider: "IIT Madras", items: ["Introduction to Data Science and AI", "Introduction to Electronic Systems"] },
+  { provider: "Other programmes", items: ["Certificate of Def-Space Programme 2026 — Bharat Space Education Research Centre", "AI Agents Fundamentals — Hugging Face"] },
 ];
 
 const communityInitiatives: CommunityInitiative[] = [
-  {
-    title: "Co Founder Starlight",
-    org: "NGO",
-    desc: "Co-founded Starlight, an NGO that organizes astronomy outreach programs and workshops for students and the community.",
-  },
+  { title: "Project Starlight", org: "Co-founder · nonprofit", desc: "Co-founded an initiative to educate students about space and light pollution." },
+  { title: "Robo Nexus", org: "Co-founder · AISG-46 robotics club", desc: "Built a school robotics community and taught and mentored teams at its robotics bootcamp." },
   {
     title: "Robotics Club Mentorship",
     org: "Robo Nexus",
@@ -78,6 +73,18 @@ const communityInitiatives: CommunityInitiative[] = [
     org: "GitHub",
     desc: "Shared PCB and code templates so beginners can learn by building real projects.",
   },
+  { title: "NYRC & Robotronics", org: "AISG-46", desc: "Organised national-level NYRC robotics competitions in 2024 and 2025, and Robotronics in 2025 and 2026." },
+  { title: "Youth Power ’25", org: "Head of Tech & Photography", desc: "Led technology and photography across multiple initiatives." },
+  { title: "School Innovation & Robotics Exhibitions", org: "AISG-46", desc: "Presented robotics at school annual day exhibitions in 2023, 2024, and 2025." },
+  { title: "Leadership & Service", org: "AISG-46 and Amitasha", desc: "Served as Pavani House prefect in Class 10, House Deputy Secretary, ATL Society core member, and taught maths and English to underprivileged girls through Amitasha." },
+  { title: "CBSE Board Examination Scribe", org: "2026", desc: "Served as a scribe for a student with learning disabilities during their Class 12 board examinations." },
+  { title: "IAAC Outreach Coordinator", org: "International Astronomy and Astrophysics Competition", desc: "Coordinated outreach for the competition." },
+  { title: "Space & Technology Communities", org: "Cygna Space Society · Hack Club · NYAS", desc: "Automation member at Cygna Space Society, Hack Club member with multiple YSWS grants over $50, and junior member of The New York Academy of Sciences." },
+  { title: "TEDx AISG46 ’26", org: "IT Department", desc: "Contributed to the event's IT department." },
+  { title: "Gurugram Police Summer Cyber Security Internship ’26", org: "GPCSSI", desc: "Completed the Gurugram Police Cyber Security Summer Internship." },
+  { title: "JEE Jokes", org: "Published book", desc: "Wrote and published a book of JEE jokes." },
+  { title: "MUN Photography", org: "JR/SR AMIGMUN", desc: "Photographed the junior and senior AMIGMUN conferences." },
+  { title: "Robo Nexus mentorship", org: "Robotics Bootcamp", desc: "Taught and mentored teams during the robotics bootcamp." },
 
 ];
 
@@ -228,7 +235,6 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 
 export function NipunDhawanSite() {
   const [loading, setLoading] = useState(true);
-  const [navHidden, setNavHidden] = useState(false);
   const [showToTop, setShowToTop] = useState(false);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [openAwardIndex, setOpenAwardIndex] = useState<number | null>(null);
@@ -243,8 +249,6 @@ export function NipunDhawanSite() {
     let lastY = window.scrollY;
     const onScroll = () => {
       const y = window.scrollY;
-      const scrollingDown = y > lastY;
-      setNavHidden(scrollingDown && y > 80);
       setShowToTop(y > 320);
       lastY = y;
     };
@@ -283,30 +287,6 @@ export function NipunDhawanSite() {
       <BlueCursor />
       {loading && <Loader onDone={() => setLoading(false)} />}
 
-      {/* Nav */}
-      <header
-        className={`fixed left-0 right-0 top-0 z-40 flex items-center justify-between px-6 py-5 transition-[transform,opacity] duration-300 md:px-12 ${navHidden ? "-translate-y-full opacity-0 pointer-events-none" : "translate-y-0 opacity-100"
-          }`}
-      >
-        <div className="flex items-center gap-3">
-          <div className="grid h-8 w-8 place-items-center rounded-full bg-primary text-primary-foreground font-display text-lg" aria-hidden="true">N</div>
-          <span className="font-mono-label">Nipun Dhawan</span>
-        </div>
-        <nav className="hidden gap-8 md:flex" aria-label="Main navigation">
-          {["About", "Contact"].map((i) => (
-            <a key={i} href={`#${i.toLowerCase()}`} className="font-mono-label hover:text-primary transition-colors">
-              {i}
-            </a>
-          ))}
-          <Link to="/blog" search={{ q: "", tags: "", sort: "newest", page: 1 }} className="font-mono-label hover:text-primary transition-colors">
-            Blog
-          </Link>
-        </nav>
-        <a href="mailto:dhawannipun58@gmail.com" className="font-mono-label rounded-full border border-border px-4 py-2 hover:border-primary hover:text-primary transition-colors">
-          Let's talk
-        </a>
-      </header>
-
       {showToTop && (
         <button
           type="button"
@@ -321,7 +301,7 @@ export function NipunDhawanSite() {
       <main id="main-content">
       <section className="relative flex min-h-screen items-center px-6 pt-32 md:px-12">
         <div className="max-w-6xl">
-          <SectionLabel>Nipun Dhawan</SectionLabel>
+          <SectionLabel>Engineering · AI · Aerospace</SectionLabel>
           <h1 className="mt-8 font-display text-[14vw] leading-[0.9] md:text-[10vw]">
             making <em className="text-primary">cool</em> stuff
             <br />
@@ -372,17 +352,17 @@ export function NipunDhawanSite() {
         </div>
       </section>
 
-      {/* Awards */}
+      {/* Achievements */}
       <section className="reveal border-t border-border px-6 py-24 md:px-12 md:py-32">
         <div className="grid gap-12 md:grid-cols-[1fr_2fr]">
-          <SectionLabel>Awards</SectionLabel>
+          <SectionLabel>Achievements</SectionLabel>
           <p className="font-display text-3xl leading-tight md:text-5xl">
-            <em className="text-primary">A growing list</em> of recognitions across electronics, aerospace and AI.
+            Competition results, research, leadership, and service across robotics, science, and technology.
           </p>
         </div>
 
         <div className="mt-20">
-          <SectionLabel>Recognition</SectionLabel>
+          <SectionLabel>Recognition & milestones</SectionLabel>
           <div className="mt-8 divide-y divide-border border-t border-border">
             {awards.map((award, index) => (
               <button
@@ -400,30 +380,77 @@ export function NipunDhawanSite() {
         </div>
       </section>
 
+      {/* Certifications */}
+      <section className="reveal border-t border-border px-6 py-24 md:px-12 md:py-32">
+        <div className="grid gap-12 md:grid-cols-[1fr_2fr]">
+          <SectionLabel>Certifications</SectionLabel>
+          <p className="font-display text-3xl leading-tight md:text-5xl">
+            Coursework and credentials in <em className="text-primary">AI, data science, electronics, and security.</em>
+          </p>
+        </div>
+        <div className="mt-16 grid gap-8 md:grid-cols-2">
+          {certifications.map((group) => (
+            <div key={group.provider} className="border-t border-border pt-6">
+              <h3 className="font-display text-3xl text-primary">{group.provider}</h3>
+              <ul className="mt-5 space-y-3 text-muted-foreground">
+                {group.items.map((item) => <li key={item} className="flex gap-3"><span className="text-primary">↗</span><span>{item}</span></li>)}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Research */}
+      <section id="research" className="reveal border-t border-border px-6 py-24 md:px-12 md:py-32">
+        <div className="grid gap-12 md:grid-cols-[1fr_2fr]">
+          <SectionLabel>Research</SectionLabel>
+          <p className="font-display text-3xl leading-tight md:text-5xl">
+            Exploring how <em className="text-primary">emerging technology</em> affects people and the environment.
+          </p>
+        </div>
+        <div className="mt-16 grid gap-px border border-border bg-border md:grid-cols-2">
+          <article className="bg-background/80 p-8 md:p-10">
+            <div className="font-mono-label text-muted-foreground">Published research · 1,000+ views</div>
+            <h3 className="mt-5 font-display text-3xl md:text-4xl">AI and its impact on students</h3>
+            <p className="mt-4 leading-relaxed text-muted-foreground">A research paper examining the impact of artificial intelligence on students and learning. The paper has received more than 1,000 views.</p>
+          </article>
+          <article className="bg-background/80 p-8 md:p-10">
+            <div className="font-mono-label text-muted-foreground">Provisional patent filed</div>
+            <h3 className="mt-5 font-display text-3xl md:text-4xl">Adaptive spectrum street lighting</h3>
+            <p className="mt-4 leading-relaxed text-muted-foreground">A street-lighting concept designed to minimise atmospheric scattering through adaptive spectrum control.</p>
+          </article>
+        </div>
+      </section>
+
       {/* Projects */}
       <section className="reveal border-t border-border px-6 py-24 md:px-12 md:py-32">
         <div className="grid gap-12 md:grid-cols-[1fr_2fr]">
           <SectionLabel>Projects</SectionLabel>
           <p className="font-display text-3xl leading-tight md:text-5xl">
-            I like to made  <em className="text-primary">cool and innovative</em> stuff that makes a difference.
+            I’ve built <em className="text-primary">10+ projects and apps</em> across robotics, AI, electronics, and aerospace to solve practical problems.
           </p>
         </div>
 
-        <div className="mt-16 grid gap-px bg-border md:grid-cols-2 lg:grid-cols-3 border border-border">
+        <div className="mt-16 space-y-6 pb-[30vh]">
           {clients.map((c, idx) => (
             <button
               key={c.name}
               type="button"
               onClick={() => setOpenIndex(idx)}
-              className="group bg-background/80 p-8 text-left transition-colors hover:bg-muted/40 backdrop-blur-sm"
+              style={{ top: `calc(6rem + ${idx * 14}px)`, zIndex: idx + 1 }}
+              className="group sticky flex min-h-[42vh] w-full flex-col justify-between overflow-hidden rounded-2xl border border-border bg-background p-7 text-left shadow-xl backdrop-blur-sm transition-[border-color,transform,box-shadow] duration-500 hover:border-primary hover:shadow-2xl sm:p-10 md:min-h-[46vh] md:flex-row md:items-end md:gap-12"
             >
-              <div className="flex items-start justify-between gap-4">
-                <h3 className="font-display text-4xl md:text-5xl">{c.name}</h3>
-                <span className="font-mono-label mt-2 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100">
-                  View ↗
-                </span>
+              <span className="pointer-events-none absolute right-6 top-3 font-display text-[10rem] leading-none text-primary/[0.04] transition-transform duration-700 group-hover:scale-110 sm:right-10 sm:top-2 sm:text-[14rem]" aria-hidden="true">
+                {String(idx + 1).padStart(2, "0")}
+              </span>
+              <div className="relative max-w-3xl">
+                <div className="font-mono-label text-primary">{c.year} · {c.industry}</div>
+                <h3 className="mt-5 font-display text-5xl leading-[0.9] md:text-7xl">{c.name}</h3>
+                <p className="mt-5 max-w-2xl text-muted-foreground md:text-lg">{c.desc}</p>
               </div>
-              <p className="mt-4 text-muted-foreground">{c.desc}</p>
+              <span className="relative mt-8 inline-flex shrink-0 items-center gap-3 font-mono-label text-foreground transition-colors group-hover:text-primary md:mb-1">
+                Explore project <span className="text-xl transition-transform duration-300 group-hover:translate-x-1">↗</span>
+              </span>
             </button>
           ))}
         </div>

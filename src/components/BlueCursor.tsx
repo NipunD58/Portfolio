@@ -30,7 +30,7 @@ export function BlueCursor() {
     <>
       <div
         aria-hidden
-        className="pointer-events-none fixed left-0 top-0 z-[100] rounded-full border border-white/40 transition-[width,height,opacity] duration-200 ease-out"
+        className="custom-cursor pointer-events-none fixed left-0 top-0 z-[100] rounded-full border border-white/40 transition-[width,height,opacity] duration-200 ease-out"
         style={{
           width: size,
           height: size,
@@ -41,7 +41,7 @@ export function BlueCursor() {
       />
       <div
         aria-hidden
-        className="pointer-events-none fixed left-0 top-0 z-[100] h-1.5 w-1.5 rounded-full"
+        className="custom-cursor pointer-events-none fixed left-0 top-0 z-[100] h-1.5 w-1.5 rounded-full"
         style={{
           background: "oklch(0.95 0.05 255)",
           transform: `translate(${pos.x - 3}px, ${pos.y - 3}px)`,

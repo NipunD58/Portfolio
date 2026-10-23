@@ -11,7 +11,7 @@ export const Route = createFileRoute("/")({
         "Selectively skilled product designer with strong focus on producing high quality & impactful digital experience.",
       path: "/",
       icons: {
-        icon: "/src/photos/logo.png",
+        icon: "/favicon.png",
         sizes: "16x16",
         type: "image/png",
       },

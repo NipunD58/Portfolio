@@ -20,8 +20,8 @@ const photoFiles = [
   "DSCN0978.JPG",
   "DSCN0988.JPG",
   "DSCN1074.JPG",
-  "DSCN4814.JPG",
-  "DSCN4871.JPG",
+  "DSCN4814-portrait.JPG",
+  "DSCN4871-portrait.JPG",
   "DSCN4959.JPG",
   "DSCN4962.JPG",
   "DSCN4963.JPG",
@@ -34,7 +34,7 @@ const photoModules = import.meta.glob("../photos/*.{jpg,JPG,jpeg,JPEG,png,webp}"
 });
 
 const photos: Photo[] = photoFiles.map((file, index) => {
-  const title = file.replace(/\.[^/.]+$/, "");
+  const title = file.replace(/\.[^/.]+$/, "").replace(/-portrait$/, "");
   const src = photoModules[`../photos/${file}`] as string | undefined;
   const expectedOrientation =
     title === "DSCN4814" || title === "DSCN4871" ? "portrait" : undefined;

@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from "react";
 import type { ReactNode } from "react";
 import { BlueCursor } from "@/components/BlueCursor";
 import { DotsBackground } from "@/components/DotsBackground";
-import { getSeo } from "@/lib/seo";
+import { getSeo, serializeJsonLd } from "@/lib/seo";
 import { articles, getAllTags, getArticleSearchText } from "@/lib/articles";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -89,7 +89,7 @@ function BlogListJsonLd() {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(data) }}
     />
   );
 }

@@ -5,6 +5,8 @@ import { cn } from "@/lib/utils";
 
 // Format: { THEME_NAME: CSS_SELECTOR }
 const THEMES = { light: "", dark: ".dark" } as const;
+const isSafeCssValue = (value: string) =>
+  /^(?:#[\da-f]{3,8}|[a-z]{1,20}|var\(--[\w-]+\)|(?:rgb|rgba|hsl|hsla|oklch|oklab|lab|lch|color)\([\w\s.,%/+*-]+\))$/i.test(value);
 
 export type ChartConfig = {
   [k in string]: {
@@ -68,26 +70,19 @@ const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
     return null;
   }
 
-  return (
-    <style
-      dangerouslySetInnerHTML={{
-        __html: Object.entries(THEMES)
-          .map(
-            ([theme, prefix]) => `
-${prefix} [data-chart=${id}] {
-${colorConfig
-  .map(([key, itemConfig]) => {
-    const color = itemConfig.theme?.[theme as keyof typeof itemConfig.theme] || itemConfig.color;
-    return color ? `  --color-${key}: ${color};` : null;
-  })
-  .join("\n")}
-}
-`,
-          )
-          .join("\n"),
-      }}
-    />
-  );
+  const safeId = id.replace(/[^\w-]/g, "");
+  const css = Object.entries(THEMES)
+    .map(([theme, prefix]) => {
+      const declarations = colorConfig.flatMap(([key, itemConfig]) => {
+        if (!/^[\w-]+$/.test(key)) return [];
+        const color = itemConfig.theme?.[theme as keyof typeof itemConfig.theme] || itemConfig.color;
+        return color && isSafeCssValue(color) ? [`  --color-${key}: ${color};`] : [];
+      });
+      return `${prefix} [data-chart=${safeId}] {\n${declarations.join("\n")}\n}`;
+    })
+    .join("\n");
+
+  return <style>{css}</style>;
 };
 
 const ChartTooltip = RechartsPrimitive.Tooltip;

@@ -2,7 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState, useEffect, useCallback, useRef } from "react";
 import { BlueCursor } from "@/components/BlueCursor";
 import { DotsBackground } from "@/components/DotsBackground";
-import { getSeo } from "@/lib/seo";
+import { getSeo, serializeJsonLd } from "@/lib/seo";
 import {
   getArticleBySlug,
   getAdjacentArticles,
@@ -71,7 +71,7 @@ function JsonLd({ article }: { article: Article }) {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+      dangerouslySetInnerHTML={{ __html: serializeJsonLd(data) }}
     />
   );
 }
